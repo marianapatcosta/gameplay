@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Alert, Text } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { GuildDataProps } from '../../components/Guild';
 import { Guild, ListDivider, Loading, NoData } from '../../components';
 
@@ -14,8 +14,9 @@ type GuildsProps = {
 export const Guilds = ({ handleGuildSelect }: GuildsProps) => {
   const [guilds, setGuilds] = useState<GuildDataProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
-  const fetchGuilds = async () => {
+  const fetchGuilds = useCallback(async () => {
     try {
       const response = await api.get('/users/@me/guilds');
       setGuilds(response.data);
@@ -24,7 +25,15 @@ export const Guilds = ({ handleGuildSelect }: GuildsProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await fetchGuilds();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     fetchGuilds();
@@ -51,6 +60,12 @@ export const Guilds = ({ handleGuildSelect }: GuildsProps) => {
         ItemSeparatorComponent={() => <ListDivider isCentered />}
         contentContainerStyle={{ paddingBottom: 68, paddingTop: 103 }}
         ListHeaderComponent={() => <ListDivider isCentered />}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={() => handleRefresh()}
+          />
+        }
       />
     );
   };
