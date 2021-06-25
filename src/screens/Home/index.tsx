@@ -1,7 +1,6 @@
 import React, { Fragment, useCallback, useState } from 'react';
-import { View, FlatList, Alert, Text } from 'react-native';
+import { View, FlatList, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppointmentDataProps } from '../../components/Appointment';
 import i18n from '../../i18n';
@@ -17,6 +16,7 @@ import {
   Profile,
 } from '../../components';
 import { COLLECTION_APPOINTMENTS } from '../../configs/database';
+import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 
 import { styles } from './styles';
 
@@ -26,6 +26,8 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const navigation = useNavigation();
+
+  const [getStoredItem] = useAsyncStorage();
 
   const handleAppointmentDetails = (
     selectedAppointment: AppointmentDataProps
@@ -41,12 +43,8 @@ export const Home = () => {
 
   const loadAppointments = async () => {
     try {
-      const appointmentStorage = await AsyncStorage.getItem(
-        COLLECTION_APPOINTMENTS
-      );
-      const storedAppointments: AppointmentDataProps[] = !!appointmentStorage
-        ? JSON.parse(appointmentStorage)
-        : [];
+      const storedAppointments: AppointmentDataProps[] =
+        (await getStoredItem(COLLECTION_APPOINTMENTS)) || [];
 
       if (!!selectedCategory) {
         return setAppointments(

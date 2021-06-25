@@ -30,14 +30,14 @@ export const SignIn = () => {
           accessibilityLabel='Discord icon'
         />
         <View style={styles.content}>
-          <Text style={styles.title}>{i18n.t('signin.title')}</Text>
-          <Text style={styles.subtitle}>{i18n.t('signin.subtitle')}</Text>
+          <Text style={styles.title}>{i18n.t('signIn.title')}</Text>
+          <Text style={styles.subtitle}>{i18n.t('signIn.subtitle')}</Text>
 
           {isLoading ? (
             <ActivityIndicator color={theme.colors.primary} />
           ) : (
             <ButtonIcon
-              title={i18n.t('signin.buttonLabel')}
+              title={i18n.t('signIn.buttonLabel')}
               /* activeOpacity={0.7} */
               onPress={handleSignIn}
             />

@@ -7,11 +7,11 @@ import React, {
 } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLLECTION_USER_AUTH } from '../configs/database';
 import { api } from '../services/api';
 import i18n from '../i18n';
+import { useAsyncStorage } from './useAsyncStorage';
 
 const {
   CDN_IMAGE,
@@ -59,6 +59,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const [
+    getStoredItem,
+    saveItemInStorage,
+    removeStoredItem,
+  ] = useAsyncStorage();
+
   const signIn = async () => {
     try {
       setIsLoading(true);
@@ -82,10 +88,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           firstName,
           token: access_token,
         };
-        await AsyncStorage.setItem(
-          COLLECTION_USER_AUTH,
-          JSON.stringify(userData)
-        );
+        await saveItemInStorage(COLLECTION_USER_AUTH, userData);
         setUser(userData);
       }
     } catch (error) {
@@ -98,17 +101,20 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = async () => {
     setUser({} as User);
     try {
-      await AsyncStorage.removeItem(COLLECTION_USER_AUTH);
-    } catch (error) {}
+      await removeStoredItem(COLLECTION_USER_AUTH);
+    } catch (error) {
+      throw new Error(i18n.t('signOut.error'));
+    }
   };
 
   const loadUserStorageData = async () => {
     try {
-      const userStorage = await AsyncStorage.getItem(COLLECTION_USER_AUTH);
+      const userStorage: User | undefined = await getStoredItem(
+        COLLECTION_USER_AUTH
+      );
       if (!!userStorage) {
-        const loggedUser = JSON.parse(userStorage) as User;
-        api.defaults.headers.authorization = `Bearer ${loggedUser.token}`;
-        setUser(loggedUser);
+        api.defaults.headers.authorization = `Bearer ${userStorage.token}`;
+        setUser(userStorage);
       }
     } catch (error) {
       Alert.alert(i18n.t('global.anErrorOccurred'), i18n.t('signIn.error'));

@@ -59,11 +59,14 @@
       "Já escolheu a/o adversária/o?"
     ]
   },
-  "signin": {
-    "error": "A autenticação não foi possível.",
+  "signIn": {
+    "error": "Não foi possível autenticá-la/o",
     "buttonLabel": "Entrar com o Discord",
     "subtitle": "Crie grupos para jogar os seus jogos favoritos com seus amigos",
     "title": "Conecte-se e organize os seus jogos"
+  },
+  "signOut": {
+    "error": "Ocorreu um erro ao fazer o logout."
   },
   "userMenu": {
     "logout": "Logout",

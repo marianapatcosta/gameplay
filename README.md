@@ -6,17 +6,19 @@ This app implements authentication using OAuth2 protocol with a Discord account 
 
 As extra-features to the app teached in the video lessons, this project implemented:
 
-- locales with i18n and can be visualized either in english or in portuguese, with the flexibility to add more languages
-- generation of random greeting sentence in the Home screen, when the user access the app, among some pre-defined sentences
-- Show Alert component with customized error messages when fetch data from api or async storage fails
-- Show message when there are no appointments and no grids to display, in Home screen and Guilds modal, respectively.
-- - Create _NoData_ component to display in Guilds, Home and Appointment details screen when the fetched array is empty
+- Implementation of multilanguage with i18n-js and expo-localization; the app can be visualized either in english or in portuguese, with the flexibility to add more languages.
+- Implementation of useAsyncStorage hook to abstrat the storage management logic.
+- Implementation of a function to generate a random greeting sentence in the Home screen, when the user access the app, among some pre-defined sentences.
+- Implementation of Alert component with customized error messages when fetch data from api or async storage fails
+- Creation of _NoData_ component to display a message when there are no appointments, no members and no grids to display, in Home screen, Appointment Screen and Guilds modal, respectively.
 
 ## Project setup
 
 ```
 yarn install
 ```
+
+Be sure that the _.env.example_ file is renamed to _.env_ and all the values for the variables declared in this file are properly fullfilled with data of your own.
 
 ### Compiles and hot-reloads for development using Expo Go
 
