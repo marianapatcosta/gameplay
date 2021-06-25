@@ -1,0 +1,74 @@
+{
+  "appointment": {
+    "guest": "anfitrião",
+    "visitor": "visitante"
+  },
+  "appointmentCreate": {
+    "at": "às",
+    "category": "Categoria",
+    "dayAndMonth": "Dia / Mês",
+    "description": "Descrição",
+    "error": "Não foi possível agendar o jogo.",
+    "hourAndMinutes": "Hora : Minutos",
+    "selectServer": "Selecione um servidor",
+    "max": "Máx 100 caracteres",
+    "schedule": "Agendar",
+    "title": "Agendar jogo"
+  },
+  "appointmentDetails": {
+    "error": "Verifique as configurações do servidor. O widget do servidor está activado?",
+    "join": "Junte-se a {{guildName}}",
+    "listTitle": "Jogadores",
+    "listSubtitle": "Total {{nrOfPlayers}}",
+    "noMembers": "Este servidor não tem membros.",
+    "play": "Entrar no jogo",
+    "title": "Detalhes"
+  },
+  "categories": {
+    "duel": "Duelo 1 x 1",
+    "fun": "Diversão",
+    "ranked": "Ranked",
+    "training": "Treino"
+  },
+  "global": {
+    "anErrorOccurred": "Ocorreu um erro!"
+  },
+  "guilds": {
+    "error": "Não foi possível mostrar os seus guilds.",
+    "noGuilds": "Não há guilds associadas ao ser perfil. Vá ao Discord e selecione as guilds que precisa."
+  },
+  "home": {
+    "error": "Não foi possível mostrar os jogos agendados.",
+    "listTitle": "Jogos agendados",
+    "listSubtitle": "Total {{nrOfGames}}",
+    "noAppointments": "Não há jogos agendados."
+  },
+  "member": {
+    "offline": "Ocupado",
+    "online": "Disponível"
+  },
+  "modal": {
+    "admin": "Administrador",
+    "guest": "Convidado"
+  },
+  "profile": {
+    "greeting": "Olá",
+    "greetingSentences": [
+      "Dia de Vitória",
+      "Animada/o para mais um jogo?",
+      "Já escolheu a/o adversária/o?"
+    ]
+  },
+  "signin": {
+    "error": "A autenticação não foi possível.",
+    "buttonLabel": "Entrar com o Discord",
+    "subtitle": "Crie grupos para jogar os seus jogos favoritos com seus amigos",
+    "title": "Conecte-se e organize os seus jogos"
+  },
+  "userMenu": {
+    "logout": "Logout",
+    "confirmLogout": "Pretende sair do GamePlay",
+    "no": "Não",
+    "yes": "Sim"
+  }
+}

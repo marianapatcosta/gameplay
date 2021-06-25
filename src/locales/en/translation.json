@@ -1,0 +1,74 @@
+{
+  "appointment": {
+    "guest": "guest",
+    "visitor": "visitor"
+  },
+  "appointmentCreate": {
+    "at": "at",
+    "category": "Category",
+    "dayAndMonth": "Day / Month",
+    "description": "Description",
+    "error": "It was not possible to schedule the game.",
+    "hourAndMinutes": "Hour : Minutes",
+    "max": "Max 100 characters",
+    "selectServer": "Select a server",
+    "schedule": "Schedule",
+    "title": "Schedule a game"
+  },
+  "appointmentDetails": {
+    "error": "Check server configurations. Is the server widget enabled?",
+    "join": "Join to {{guildName}}",
+    "listTitle": "Players",
+    "listSubtitle": "Total {{nrOfPlayers}}",
+    "noMembers": "This server as no members.",
+    "play": "Enter the game",
+    "title": "Details"
+  },
+  "categories": {
+    "duel": "1 x 1 Dual",
+    "fun": "Fun",
+    "ranked": "Ranked",
+    "training": "Training"
+  },
+  "global": {
+    "anErrorOccurred": "An error occurred!"
+  },
+  "guilds": {
+    "error": "It was not possible to load your guilds.",
+    "noGuilds": "There are no guilds associated to your profile. Go to Discord and select the guilds that you need."
+  },
+  "home": {
+    "error": "It was not possible to load the scheduled games.",
+    "listTitle": "Scheduled games",
+    "listSubtitle": "Total {{nrOfGames}}",
+    "noAppointments": "There are no scheduled games."
+  },
+  "member": {
+    "offline": "Offline",
+    "online": "Online"
+  },
+  "modal": {
+    "admin": "Administrator",
+    "guest": "Guest"
+  },
+  "profile": {
+    "greeting": "Hello",
+    "greetingSentences": [
+      "Day of Winnig",
+      "Are you excited to play?",
+      "Have you chosen your adversary?"
+    ]
+  },
+  "signin": {
+    "error": "It was not possible to log you in.",
+    "buttonLabel": "Login with Discord",
+    "subtitle": "Create groups to play your favourite games with your friends",
+    "title": "Connect and organize your games"
+  },
+  "userMenu": {
+    "logout": "Logout",
+    "confirmLogout": "Do you want to Logout from Gameplay?",
+    "no": "No",
+    "yes": "Yes"
+  }
+}
