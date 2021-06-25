@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useState } from 'react';
-import { View, FlatList, Alert } from 'react-native';
+import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { AppointmentDataProps } from '../../components/Appointment';
@@ -24,9 +24,9 @@ export const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [appointments, setAppointments] = useState<AppointmentDataProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   const navigation = useNavigation();
-
   const [getStoredItem] = useAsyncStorage();
 
   const handleAppointmentDetails = (
@@ -41,7 +41,15 @@ export const Home = () => {
       ? setSelectedCategory('')
       : setSelectedCategory(categoryId);
 
-  const loadAppointments = async () => {
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await loadAppointments();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
+
+  const loadAppointments = useCallback(async () => {
     try {
       const storedAppointments: AppointmentDataProps[] =
         (await getStoredItem(COLLECTION_APPOINTMENTS)) || [];
@@ -62,7 +70,7 @@ export const Home = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   // useFocusEffect allows to fetch data and come back to the page; only when the screen has focus,
   // the function inside useFocusEffect runs; used together with useCallback
@@ -102,6 +110,12 @@ export const Home = () => {
           ItemSeparatorComponent={() => <ListDivider />}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 69 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={() => handleRefresh()}
+            />
+          }
         />
       </Fragment>
     );
