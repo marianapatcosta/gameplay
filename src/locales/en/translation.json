@@ -59,11 +59,14 @@
       "Have you chosen your adversary?"
     ]
   },
-  "signin": {
+  "signIn": {
     "error": "It was not possible to log you in.",
     "buttonLabel": "Login with Discord",
     "subtitle": "Create groups to play your favourite games with your friends",
     "title": "Connect and organize your games"
+  },
+  "signOut": {
+    "error": "There was an error while logging you out."
   },
   "userMenu": {
     "logout": "Logout",

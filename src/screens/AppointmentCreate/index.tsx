@@ -9,10 +9,12 @@ import {
 } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
+import { useNavigation } from '@react-navigation/native';
 
 import i18n from '../../i18n';
+import { COLLECTION_APPOINTMENTS } from '../../configs/database';
+import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import {
   Background,
   Button,
@@ -28,8 +30,7 @@ import { GuildDataProps } from '../../components/Guild';
 
 import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
-import { COLLECTION_APPOINTMENTS } from '../../configs/database';
-import { useNavigation } from '@react-navigation/native';
+import { AppointmentDataProps } from '../../components/Appointment';
 
 export const AppointmentCreate = () => {
   const [category, setCategory] = useState<string>('');
@@ -40,6 +41,8 @@ export const AppointmentCreate = () => {
   const [hour, setHour] = useState<string>();
   const [minute, setMinute] = useState<string>();
   const [description, setDescription] = useState<string>('');
+
+  const [getStoredItem, saveItemInStorage] = useAsyncStorage();
 
   const navigation = useNavigation();
 
@@ -65,20 +68,17 @@ export const AppointmentCreate = () => {
       category,
       date: `${day}/${month} ${i18n.t(
         'appointmentCreate.at'
-      )} ${hour}:${minute}h`,
+      )} ${hour}:${minute}`,
       description,
     };
     try {
-      const appointmentStorage = await AsyncStorage.getItem(
-        COLLECTION_APPOINTMENTS
-      );
-      const appointments = !!appointmentStorage
-        ? JSON.parse(appointmentStorage)
-        : [];
-      await AsyncStorage.setItem(
-        COLLECTION_APPOINTMENTS,
-        JSON.stringify([...appointments, newAppointment])
-      );
+      const appointments: AppointmentDataProps[] =
+        (await getStoredItem(COLLECTION_APPOINTMENTS)) || [];
+
+      await saveItemInStorage(COLLECTION_APPOINTMENTS, [
+        ...appointments,
+        newAppointment,
+      ]);
       navigation.navigate('Home');
     } catch (error) {
       Alert.alert(
