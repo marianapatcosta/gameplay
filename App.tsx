@@ -34,7 +34,7 @@ export default function App() {
   const { getStoredItem } = useAsyncStorage();
   const deviceTheme = useColorScheme() || 'dark';
 
-  console.log({ deviceTheme });
+  /*  console.log({ deviceTheme }); */
   const theme = themes[deviceTheme];
 
   const getStoredUserPreferences = async () => {

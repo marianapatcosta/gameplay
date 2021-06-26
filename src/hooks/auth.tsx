@@ -7,25 +7,11 @@ import React, {
 } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import { Alert } from 'react-native';
-import {
-  CDN_IMAGE,
-  CLIENT_ID,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-} from '../configs/discordAuth';
 import { COLLECTION_USER_AUTH } from '../configs/database';
 import { api } from '../services/api';
 import i18n from '../i18n';
 import { useAsyncStorage } from './useAsyncStorage';
-
-/* const {
-  CDN_IMAGE,
-  CLIENT_ID,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-} = process.env; */
+import { CDN_IMAGE, CLIENT_ID, REDIRECT_URI, RESPONSE_TYPE, SCOPE } from '@env';
 
 enum ResponseTypes {
   SUCCESS = 'success',
@@ -58,6 +44,16 @@ type AuthorizationResponse = AuthSession.AuthSessionResult & {
     error?: string;
   };
 };
+
+console.log(
+  7777,
+  process.env,
+  CDN_IMAGE,
+  CLIENT_ID,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE
+);
 
 const AuthContext = createContext({} as AuthContexData);
 

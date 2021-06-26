@@ -23,7 +23,6 @@ import {
   Profile,
 } from '../../components';
 import { ConfirmModal } from '../../modal-views';
-import { useAuth } from '../../hooks/auth';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import { COLLECTION_APPOINTMENTS } from '../../configs/database';
 
