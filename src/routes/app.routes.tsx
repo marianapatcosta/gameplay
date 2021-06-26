@@ -1,7 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { AppointmentCreate, AppointmentDetails, Home } from '../screens';
+import {
+  AppointmentCreate,
+  AppointmentDetails,
+  Home,
+  UserProfile,
+} from '../screens';
 
 import { theme } from '../global/styles/theme';
 
@@ -19,5 +24,6 @@ export const AppRoutes = () => (
     <Screen name='Home' component={Home} />
     <Screen name='AppointmentDetails' component={AppointmentDetails} />
     <Screen name='AppointmentCreate' component={AppointmentCreate} />
+    <Screen name='UserProfile' component={UserProfile} />
   </Navigator>
 );

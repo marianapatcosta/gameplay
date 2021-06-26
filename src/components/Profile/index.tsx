@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/auth';
 
@@ -9,28 +9,23 @@ import { Avatar } from '../Avatar';
 
 import { styles } from './styles';
 
-type ProfileProps = {};
+type ProfileProps = {
+  handleAvatarPress: () => void;
+};
 
-export const Profile = ({}: ProfileProps) => {
-  const { user, signOut } = useAuth();
+export const Profile = ({ handleAvatarPress }: ProfileProps) => {
+  const { user } = useAuth();
   const randomGreetingSentence = useMemo(
     () => getRandomSentence(i18n.t('profile.greetingSentences')),
-    []
+    [i18n.locale]
   );
-
-  const handleSignOut = () => {
-    Alert.alert(i18n.t('userMenu.logout'), i18n.t('userMenu.confirmLogout'), [
-      { text: i18n.t('userMenu.no'), style: 'cancel' },
-      { text: i18n.t('userMenu.yes'), onPress: () => signOut() },
-    ]);
-  };
 
   return (
     <View style={styles.container}>
-      <RectButton onPress={handleSignOut}>
+      <RectButton onPress={handleAvatarPress}>
         <Avatar urlImage={user.avatar} />
       </RectButton>
-      <View>
+      <View style={styles.text}>
         <View style={styles.user}>
           <Text style={styles.greeting}>{i18n.t('profile.greeting')}</Text>
           <Text style={styles.username}>{user.firstName}</Text>

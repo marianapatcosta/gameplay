@@ -7,19 +7,25 @@ import React, {
 } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import { Alert } from 'react-native';
-
-import { COLLECTION_USER_AUTH } from '../configs/database';
-import { api } from '../services/api';
-import i18n from '../i18n';
-import { useAsyncStorage } from './useAsyncStorage';
-
-const {
+import {
   CDN_IMAGE,
   CLIENT_ID,
   REDIRECT_URI,
   RESPONSE_TYPE,
   SCOPE,
-} = process.env;
+} from '../configs/discordAuth';
+import { COLLECTION_USER_AUTH } from '../configs/database';
+import { api } from '../services/api';
+import i18n from '../i18n';
+import { useAsyncStorage } from './useAsyncStorage';
+
+/* const {
+  CDN_IMAGE,
+  CLIENT_ID,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE,
+} = process.env; */
 
 enum ResponseTypes {
   SUCCESS = 'success',
@@ -59,11 +65,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [
+  const {
     getStoredItem,
     saveItemInStorage,
     removeStoredItem,
-  ] = useAsyncStorage();
+  } = useAsyncStorage();
 
   const signIn = async () => {
     try {

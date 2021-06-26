@@ -26,7 +26,7 @@ export const Member = ({ data }: MemberProps) => {
   return (
     <View style={styles.container}>
       <Avatar urlImage={avatar_url} />
-      <View>
+      <View style={styles.text}>
         <Text style={styles.title}>{username}</Text>
         <View style={styles.status}>
           <View

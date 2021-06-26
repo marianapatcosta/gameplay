@@ -31,7 +31,9 @@
     "training": "Treino"
   },
   "global": {
-    "anErrorOccurred": "Ocorreu um erro!"
+    "anErrorOccurred": "Ocorreu um erro!",
+    "no": "Não",
+    "yes": "Sim"
   },
   "guilds": {
     "error": "Não foi possível mostrar os seus guilds.",
@@ -54,7 +56,7 @@
   "profile": {
     "greeting": "Olá",
     "greetingSentences": [
-      "Dia de Vitória",
+      "Dia de Vitória!",
       "Animada/o para mais um jogo?",
       "Já escolheu a/o adversária/o?"
     ]
@@ -68,10 +70,16 @@
   "signOut": {
     "error": "Ocorreu um erro ao fazer o logout."
   },
-  "userMenu": {
+  "userProfile": {
+    "confirmLogout": "Pretende sair do",
+    "dark": "escuro",
+    "english": "inglês",
+    "language": "Idioma",
+    "light": "claro",
     "logout": "Logout",
-    "confirmLogout": "Pretende sair do GamePlay",
-    "no": "Não",
-    "yes": "Sim"
+    "portuguese": "português",
+    "theme": "Tema",
+    "title": "Perfil do Utilizador",
+    "username": "Nome de utilizador"
   }
 }

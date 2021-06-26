@@ -12,11 +12,13 @@ import {
   ListDivider,
   ListHeader,
   Loading,
+  ModalView,
   NoData,
   Profile,
 } from '../../components';
-import { COLLECTION_APPOINTMENTS } from '../../configs/database';
+import { useAuth } from '../../hooks/auth';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
+import { COLLECTION_APPOINTMENTS } from '../../configs/database';
 
 import { styles } from './styles';
 
@@ -25,9 +27,11 @@ export const Home = () => {
   const [appointments, setAppointments] = useState<AppointmentDataProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [modalType, setModalType] = useState<string>('');
 
   const navigation = useNavigation();
-  const [getStoredItem] = useAsyncStorage();
+  const { getStoredItem } = useAsyncStorage();
+  const { signOut } = useAuth();
 
   const handleAppointmentDetails = (
     selectedAppointment: AppointmentDataProps
@@ -35,6 +39,8 @@ export const Home = () => {
 
   const handleAppointmentCreate = () =>
     navigation.navigate('AppointmentCreate');
+
+  const handleAUserProfile = () => navigation.navigate('UserProfile');
 
   const handleCategorySelect = (categoryId: string) =>
     categoryId === selectedCategory
@@ -48,6 +54,10 @@ export const Home = () => {
       setIsRefreshing(false);
     }, 1000);
   }, []);
+
+  const handleOpenModal = (modalType: string) => setModalType(modalType);
+
+  const handleCloseModal = () => setModalType('');
 
   const loadAppointments = useCallback(async () => {
     try {
@@ -122,21 +132,25 @@ export const Home = () => {
   };
 
   return (
-    <Background>
-      <View style={styles.container} accessible={true}>
-        <View style={styles.header}>
-          <Profile />
-          <ButtonAdd onPress={handleAppointmentCreate} />
+    <Fragment>
+      <Background>
+        <View style={styles.container} accessible={true}>
+          <View style={styles.header}>
+            <Profile handleAvatarPress={handleAUserProfile} />
+            <ButtonAdd onPress={handleAppointmentCreate} />
+          </View>
+          <View>
+            <CategorySelect
+              categorySelected={selectedCategory}
+              handleCategorySelect={handleCategorySelect}
+            />
+          </View>
+          {renderContent()}
         </View>
-        <View>
-          <CategorySelect
-            categorySelected={selectedCategory}
-            handleCategorySelect={handleCategorySelect}
-          />
-        </View>
-
-        {renderContent()}
-      </View>
-    </Background>
+      </Background>
+      <ModalView visible={!!modalType} closeModal={handleCloseModal}>
+        {/* renderModalContent() */}
+      </ModalView>
+    </Fragment>
   );
 };
