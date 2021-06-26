@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import { DiscordSvg } from '../../assets';
-import { CDN_IMAGE } from '../../configs/discordAuth';
+import { CDN_IMAGE } from '@env';
 
 import { styles } from './styles';
 
