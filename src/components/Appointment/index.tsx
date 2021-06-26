@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import {
+  BorderlessButton,
+  RectButton,
+  RectButtonProps,
+} from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 import { categories } from '../../utils/categories';
 import i18n from '../../i18n';
@@ -22,12 +27,22 @@ export type AppointmentDataProps = {
 
 export type AppointmentProps = RectButtonProps & {
   data: AppointmentDataProps;
+  handleEdit: () => void;
+  handleDelete: () => void;
 };
 
-export const Appointment = ({ data, ...otherProps }: AppointmentProps) => {
-  const category = categories.find(({ id }) => id === data.id);
+export const Appointment = ({
+  data,
+  handleDelete,
+  handleEdit,
+  ...otherProps
+}: AppointmentProps) => {
+  const category = categories.find(({ id }) => id === data.category);
   const { owner, name, id, icon } = data?.guild;
   const { primary, on, secondary50, secondary70 } = theme.colors;
+  const editedDate = `${data.date.split(' ')[0]} ${i18n.t(
+    'appointmentCreate.at'
+  )} ${data.date.split(' ')[1]}`;
 
   return (
     <RectButton {...otherProps}>
@@ -43,10 +58,10 @@ export const Appointment = ({ data, ...otherProps }: AppointmentProps) => {
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.category}>{category?.title}</Text>
           </View>
-          <View style={styles.footer}>
+          <View style={styles.main}>
             <View style={styles.dateInfo}>
               <CalendarSvg />
-              <Text style={styles.date}>{data.date}</Text>
+              <Text style={styles.date}>{editedDate}</Text>
             </View>
             <View style={styles.playersInfo}>
               <PlayerSvg fill={owner ? primary : on} />
@@ -56,6 +71,18 @@ export const Appointment = ({ data, ...otherProps }: AppointmentProps) => {
                   : i18n.t('appointment.visitor')}
               </Text>
             </View>
+          </View>
+          <View style={styles.footer}>
+            <BorderlessButton style={styles.editButton} onPress={handleEdit}>
+              <Entypo name='edit' size={22} color={theme.colors.heading} />
+            </BorderlessButton>
+            <BorderlessButton onPress={handleDelete}>
+              <MaterialIcons
+                name='delete'
+                size={22}
+                color={theme.colors.heading}
+              />
+            </BorderlessButton>
           </View>
         </View>
       </View>

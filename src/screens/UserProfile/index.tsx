@@ -9,7 +9,7 @@ import { Avatar, Background, Header, ModalView } from '../../components';
 import { ConfirmModal } from '../../modal-views';
 import { useAuth } from '../../hooks/auth';
 import i18n from '../../i18n';
-import { LOCALES, THEMES } from '../../constants';
+import { LOCALES, THEMES } from '../../utils/constants';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import { COLLECTION_LOCALE, COLLECTION_THEME } from '../../configs/database';
 

@@ -41,6 +41,7 @@
     "noGuilds": "Não há guilds associadas ao ser perfil. Vá ao Discord e selecione as guilds que precisa."
   },
   "home": {
+    "deleteAppointment": "Pretende eliminar o agendamento?",
     "error": "Não foi possível mostrar os jogos agendados.",
     "listTitle": "Jogos agendados",
     "listSubtitle": "Total {{nrOfGames}}",

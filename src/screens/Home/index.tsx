@@ -1,5 +1,11 @@
 import React, { Fragment, useCallback, useState } from 'react';
-import { View, FlatList, Alert, RefreshControl } from 'react-native';
+import {
+  View,
+  FlatList,
+  Alert,
+  RefreshControl,
+  Dimensions,
+} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { AppointmentDataProps } from '../../components/Appointment';
@@ -16,6 +22,7 @@ import {
   NoData,
   Profile,
 } from '../../components';
+import { ConfirmModal } from '../../modal-views';
 import { useAuth } from '../../hooks/auth';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import { COLLECTION_APPOINTMENTS } from '../../configs/database';
@@ -27,11 +34,12 @@ export const Home = () => {
   const [appointments, setAppointments] = useState<AppointmentDataProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [modalType, setModalType] = useState<string>('');
-
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const [itemToDelete, setItemToDelete] = useState<AppointmentDataProps>(
+    {} as AppointmentDataProps
+  );
   const navigation = useNavigation();
-  const { getStoredItem } = useAsyncStorage();
-  const { signOut } = useAuth();
+  const { getStoredItem, saveItemInStorage } = useAsyncStorage();
 
   const handleAppointmentDetails = (
     selectedAppointment: AppointmentDataProps
@@ -55,9 +63,34 @@ export const Home = () => {
     }, 1000);
   }, []);
 
-  const handleOpenModal = (modalType: string) => setModalType(modalType);
+  const handleDeleteAppointment = (item: AppointmentDataProps) => {
+    setItemToDelete(item);
+    setOpenDeleteModal(true);
+  };
 
-  const handleCloseModal = () => setModalType('');
+  const handleEditAppointment = (item: AppointmentDataProps) =>
+    navigation.navigate('AppointmentCreate', { appointmentToEdit: item });
+
+  const handleConfirmDelete = async () => {
+    try {
+      const storedAppointments = await getStoredItem(COLLECTION_APPOINTMENTS);
+      const updatedAppointments = storedAppointments.filter(
+        (appointment: AppointmentDataProps) =>
+          appointment.id !== itemToDelete.id
+      );
+      await saveItemInStorage(COLLECTION_APPOINTMENTS, updatedAppointments);
+      await loadAppointments();
+    } catch (error) {
+      Alert.alert(i18n.t('global.anErrorOccurred'));
+    } finally {
+      setItemToDelete({} as AppointmentDataProps);
+      setOpenDeleteModal(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setOpenDeleteModal(false);
+  };
 
   const loadAppointments = useCallback(async () => {
     try {
@@ -80,7 +113,7 @@ export const Home = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [selectedCategory]);
 
   // useFocusEffect allows to fetch data and come back to the page; only when the screen has focus,
   // the function inside useFocusEffect runs; used together with useCallback
@@ -115,11 +148,15 @@ export const Home = () => {
             <Appointment
               data={item}
               onPress={() => handleAppointmentDetails(item)}
+              handleDelete={() => handleDeleteAppointment(item)}
+              handleEdit={() => handleEditAppointment(item)}
             />
           )}
           ItemSeparatorComponent={() => <ListDivider />}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 69 }}
+          ListHeaderComponent={() => <ListDivider isCentered />}
+          ListFooterComponent={() => <ListDivider isCentered />}
           refreshControl={
             <RefreshControl
               refreshing={isRefreshing}
@@ -148,8 +185,16 @@ export const Home = () => {
           {renderContent()}
         </View>
       </Background>
-      <ModalView visible={!!modalType} closeModal={handleCloseModal}>
-        {/* renderModalContent() */}
+      <ModalView
+        visible={openDeleteModal}
+        marginTop={Dimensions.get('window').height - 150}
+        closeModal={handleCloseModal}
+      >
+        <ConfirmModal
+          title={i18n.t('home.deleteAppointment')}
+          onCancel={handleCloseModal}
+          onConfirm={handleConfirmDelete}
+        />
       </ModalView>
     </Fragment>
   );

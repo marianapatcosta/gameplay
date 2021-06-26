@@ -9,6 +9,7 @@ As extra-features to the app teached in the video lessons, this project implemen
 - Implementation of multilanguage with i18n-js and expo-localization; the app can be visualized either in english or in portuguese, with the flexibility to add more languages.
 - Development UserProfile screen, to handle the logout and language settings.
 - Development of Logout modal to signout.
+- Implement Edit and Delete appointment functionalities.
 - Implementation of useAsyncStorage hook to abstrat the storage management logic.
 - Implementation of a function to generate a random greeting sentence in the Home screen, when the user access the app, among some pre-defined sentences.
 - Implementation of Alert component with customized error messages when fetch data from api or async storage fails

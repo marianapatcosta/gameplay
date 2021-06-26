@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -10,7 +10,7 @@ import {
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import uuid from 'react-native-uuid';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import i18n from '../../i18n';
 import { COLLECTION_APPOINTMENTS } from '../../configs/database';
@@ -30,11 +30,15 @@ import { GuildDataProps } from '../../components/Guild';
 import {
   MONTHS_WITH_THIRTY_DAYS,
   MONTH_WITH_LESS_THAN_THIRTY_DAYS,
-} from '../../constants';
+} from '../../utils/constants';
 import { AppointmentDataProps } from '../../components/Appointment';
 
 import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
+
+type Params = {
+  appointmentToEdit: AppointmentDataProps | undefined;
+};
 
 export const AppointmentCreate = () => {
   const [category, setCategory] = useState<string>('');
@@ -45,6 +49,7 @@ export const AppointmentCreate = () => {
   const [hour, setHour] = useState<string>();
   const [minute, setMinute] = useState<string>();
   const [description, setDescription] = useState<string>('');
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const isFormFullfilled = useMemo(
     () => !!category && !!guild && !!day && !!month && !!hour && !!minute,
@@ -54,6 +59,10 @@ export const AppointmentCreate = () => {
   const { getStoredItem, saveItemInStorage } = useAsyncStorage();
 
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const params = route.params as Params;
+  const appointmentToEdit = params?.appointmentToEdit as AppointmentDataProps;
 
   const isDateValid = () => {
     if (Number(hour) < 0 || Number(hour) >= 24) {
@@ -80,7 +89,6 @@ export const AppointmentCreate = () => {
     }
 
     if (MONTHS_WITH_THIRTY_DAYS.includes(Number(month)) && Number(day) > 30) {
-      console.log(666);
       return false;
     }
 
@@ -106,14 +114,11 @@ export const AppointmentCreate = () => {
     setOpenGuildsModa(false);
   };
 
-  const handleCreateAppointment = async () => {
+  const handleSaveAppointment = async () => {
     const newAppointment = {
-      id: uuid.v4(),
       guild,
       category,
-      date: `${day}/${month} ${i18n.t(
-        'appointmentCreate.at'
-      )} ${hour}:${minute}`,
+      date: `${day}/${month} ${hour}:${minute}`,
       description,
     };
 
@@ -129,10 +134,20 @@ export const AppointmentCreate = () => {
       const appointments: AppointmentDataProps[] =
         (await getStoredItem(COLLECTION_APPOINTMENTS)) || [];
 
-      await saveItemInStorage(COLLECTION_APPOINTMENTS, [
-        ...appointments,
-        newAppointment,
-      ]);
+      if (editMode) {
+        const updatedItems = appointments.map(appointment =>
+          appointment.id === appointmentToEdit.id
+            ? { newAppointment, id: appointment.id }
+            : appointment
+        );
+        await saveItemInStorage(COLLECTION_APPOINTMENTS, updatedItems);
+      } else {
+        await saveItemInStorage(COLLECTION_APPOINTMENTS, [
+          ...appointments,
+          { ...newAppointment, id: uuid.v4() },
+        ]);
+      }
+
       navigation.navigate('Home');
     } catch (error) {
       Alert.alert(
@@ -141,6 +156,20 @@ export const AppointmentCreate = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (!!appointmentToEdit) {
+      setEditMode(true);
+      const { category, guild, date, description } = appointmentToEdit;
+      setCategory(category);
+      setGuild(guild);
+      setDescription(description);
+      setDay(date.split('/')[0]);
+      setMonth(date.split('/')[1].split(' ')[0]);
+      setHour(date.split(' ')[1].split(':')[0]);
+      setMinute(date.split(':')[1]);
+    }
+  }, [appointmentToEdit]);
 
   return (
     // KeyboardAvoidingView wraps the screen and scrolls it when the keyboard is active/visible
@@ -240,7 +269,7 @@ export const AppointmentCreate = () => {
               <Button
                 enabled={isFormFullfilled}
                 title={i18n.t('appointmentCreate.schedule')}
-                onPress={handleCreateAppointment}
+                onPress={handleSaveAppointment}
               />
             </View>
           </View>
