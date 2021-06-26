@@ -10,6 +10,7 @@
     "description": "Descrição",
     "error": "Não foi possível agendar o jogo.",
     "hourAndMinutes": "Hora : Minutos",
+    "invalidDate": "Por favor insira uma data válida.",
     "selectServer": "Selecione um servidor",
     "max": "Máx 100 caracteres",
     "schedule": "Agendar",

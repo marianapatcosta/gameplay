@@ -10,6 +10,7 @@
     "description": "Description",
     "error": "It was not possible to schedule the game.",
     "hourAndMinutes": "Hour : Minutes",
+    "invalidDate": "Please insert a valid date.",
     "max": "Max 100 characters",
     "selectServer": "Select a server",
     "schedule": "Schedule",

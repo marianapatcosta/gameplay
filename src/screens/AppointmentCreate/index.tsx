@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -27,10 +27,14 @@ import {
 } from '../../components';
 import { Guilds } from '../../modal-views';
 import { GuildDataProps } from '../../components/Guild';
+import {
+  MONTHS_WITH_THIRTY_DAYS,
+  MONTH_WITH_LESS_THAN_THIRTY_DAYS,
+} from '../../constants';
+import { AppointmentDataProps } from '../../components/Appointment';
 
 import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
-import { AppointmentDataProps } from '../../components/Appointment';
 
 export const AppointmentCreate = () => {
   const [category, setCategory] = useState<string>('');
@@ -42,9 +46,50 @@ export const AppointmentCreate = () => {
   const [minute, setMinute] = useState<string>();
   const [description, setDescription] = useState<string>('');
 
+  const isFormFullfilled = useMemo(
+    () => !!category && !!guild && !!day && !!month && !!hour && !!minute,
+    [category, guild, day, month, hour, minute]
+  );
+
   const { getStoredItem, saveItemInStorage } = useAsyncStorage();
 
   const navigation = useNavigation();
+
+  const isDateValid = () => {
+    if (Number(hour) < 0 || Number(hour) >= 24) {
+      return false;
+    }
+
+    if (Number(minute) < 0 || Number(minute) >= 60) {
+      return false;
+    }
+
+    if (Number(month) < 0 || Number(month) > 12) {
+      return false;
+    }
+
+    if (Number(day) < 0) {
+      return false;
+    }
+
+    if (
+      Number(month) === MONTH_WITH_LESS_THAN_THIRTY_DAYS &&
+      Number(day) > 29
+    ) {
+      return false;
+    }
+
+    if (MONTHS_WITH_THIRTY_DAYS.includes(Number(month)) && Number(day) > 30) {
+      console.log(666);
+      return false;
+    }
+
+    if (Number(day) > 32) {
+      return false;
+    }
+
+    return true;
+  };
 
   const handleCategorySelect = (categoryId: string) => setCategory(categoryId);
 
@@ -71,7 +116,16 @@ export const AppointmentCreate = () => {
       )} ${hour}:${minute}`,
       description,
     };
+
     try {
+      if (!isFormFullfilled) return;
+
+      if (!isDateValid()) {
+        return Alert.alert(
+          i18n.t('global.anErrorOccurred'),
+          i18n.t('appointmentCreate.invalidDate')
+        );
+      }
       const appointments: AppointmentDataProps[] =
         (await getStoredItem(COLLECTION_APPOINTMENTS)) || [];
 
@@ -184,6 +238,7 @@ export const AppointmentCreate = () => {
             />
             <View style={styles.footer}>
               <Button
+                enabled={isFormFullfilled}
                 title={i18n.t('appointmentCreate.schedule')}
                 onPress={handleCreateAppointment}
               />

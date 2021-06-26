@@ -4,14 +4,13 @@ import { Text } from 'react-native';
 
 import { styles } from './styles';
 
-type ButtonIconProps = RectButtonProps & {
+type ButtonProps = RectButtonProps & {
   title: string;
 };
 
-export const Button = ({ title, ...otherProps }: ButtonIconProps) => (
+export const Button = ({ title, enabled, ...otherProps }: ButtonProps) => (
   <RectButton
-    style={styles.container}
-    accessibilityLabel={title}
+    style={[styles.container, { opacity: enabled ? 1 : 0.5 }]}
     {...otherProps}
   >
     <Text style={styles.title}>{title}</Text>

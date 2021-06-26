@@ -26,3 +26,7 @@ export const THEMES: DROPDOWN_OPTION[] = [
     value: i18n.t('userProfile.light'),
   },
 ];
+
+export const MONTHS_WITH_THIRTY_DAYS = [4, 6, 9, 11];
+
+export const MONTH_WITH_LESS_THAN_THIRTY_DAYS = 2;
