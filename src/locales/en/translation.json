@@ -31,7 +31,9 @@
     "training": "Training"
   },
   "global": {
-    "anErrorOccurred": "An error occurred!"
+    "anErrorOccurred": "An error occurred!",
+    "no": "No",
+    "yes": "Yes"
   },
   "guilds": {
     "error": "It was not possible to load your guilds.",
@@ -54,9 +56,9 @@
   "profile": {
     "greeting": "Hello",
     "greetingSentences": [
-      "Day of Winnig",
+      "Day of Winning!",
       "Are you excited to play?",
-      "Have you chosen your adversary?"
+      "Have you chosen the adversary?"
     ]
   },
   "signIn": {
@@ -68,10 +70,16 @@
   "signOut": {
     "error": "There was an error while logging you out."
   },
-  "userMenu": {
+  "userProfile": {
+    "confirmLogout": "Do you want to Logout from",
+    "dark": "escuro",
+    "english": "english",
+    "language": "Language",
+    "light": "claro",
     "logout": "Logout",
-    "confirmLogout": "Do you want to Logout from Gameplay?",
-    "no": "No",
-    "yes": "Yes"
+    "portuguese": "portuguese",
+    "theme": "Theme",
+    "title": "User Profile",
+    "username": "Username"
   }
 }

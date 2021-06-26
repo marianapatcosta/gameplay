@@ -3,9 +3,10 @@ import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { GuildDataProps } from '../../components/Guild';
 import { Guild, ListDivider, Loading, NoData } from '../../components';
 
-import { styles } from './styles';
 import { api } from '../../services/api';
 import i18n from '../../i18n';
+
+import { styles } from './styles';
 
 type GuildsProps = {
   handleGuildSelect: (guild: GuildDataProps) => void;

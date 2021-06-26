@@ -25,7 +25,7 @@ import {
   SmallInput,
   TextArea,
 } from '../../components';
-import { Guilds } from '../Guilds';
+import { Guilds } from '../../modal-views';
 import { GuildDataProps } from '../../components/Guild';
 
 import { theme } from '../../global/styles/theme';
@@ -42,7 +42,7 @@ export const AppointmentCreate = () => {
   const [minute, setMinute] = useState<string>();
   const [description, setDescription] = useState<string>('');
 
-  const [getStoredItem, saveItemInStorage] = useAsyncStorage();
+  const { getStoredItem, saveItemInStorage } = useAsyncStorage();
 
   const navigation = useNavigation();
 
@@ -191,7 +191,11 @@ export const AppointmentCreate = () => {
           </View>
         </ScrollView>
       </Background>
-      <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
+      <ModalView
+        visible={openGuildsModal}
+        hasTopBar
+        closeModal={handleCloseGuilds}
+      >
         <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
     </KeyboardAvoidingView>

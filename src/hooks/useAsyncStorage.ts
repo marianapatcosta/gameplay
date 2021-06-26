@@ -30,7 +30,7 @@ const useAsyncStorage = () => {
     }
   };
 
-  return [getStoredItem, saveItemInStorage, removeStoredItem];
+  return { getStoredItem, saveItemInStorage, removeStoredItem };
 };
 
 export { useAsyncStorage };
