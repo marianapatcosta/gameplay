@@ -41,6 +41,7 @@
     "noGuilds": "There are no guilds associated to your profile. Go to Discord and select the guilds that you need."
   },
   "home": {
+    "deleteAppointment": "Do you want to delete the appointment?",
     "error": "It was not possible to load the scheduled games.",
     "listTitle": "Scheduled games",
     "listSubtitle": "Total {{nrOfGames}}",

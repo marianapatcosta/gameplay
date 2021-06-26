@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.highlight,
     marginRight: 24,
   },
-  footer: {
+  main: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -56,5 +56,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 20,
+  },
+  footer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingRight: 24,
+    paddingVertical: 10,
+    opacity: 0.8,
+  },
+  editButton: {
+    marginRight: 15,
   },
 });

@@ -61,6 +61,7 @@ export const Guilds = ({ handleGuildSelect }: GuildsProps) => {
         ItemSeparatorComponent={() => <ListDivider isCentered />}
         contentContainerStyle={{ paddingBottom: 68, paddingTop: 103 }}
         ListHeaderComponent={() => <ListDivider isCentered />}
+        ListFooterComponent={() => <ListDivider isCentered />}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
