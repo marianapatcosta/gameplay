@@ -75,10 +75,10 @@
   },
   "userProfile": {
     "confirmLogout": "Do you want to Logout from",
-    "dark": "escuro",
+    "dark": "dark",
     "english": "english",
     "language": "Language",
-    "light": "claro",
+    "light": "light",
     "logout": "Logout",
     "portuguese": "portuguese",
     "theme": "Theme",

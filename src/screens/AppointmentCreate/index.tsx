@@ -163,6 +163,8 @@ export const AppointmentCreate = () => {
         i18n.t('global.anErrorOccurred'),
         i18n.t('appointmentCreate.error')
       );
+    } finally {
+      setEditMode(false);
     }
   };
 

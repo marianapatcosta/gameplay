@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
 import {
   BorderlessButton,
@@ -8,7 +8,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
-import { categories } from '../../utils/categories';
+import { getCategories } from '../../utils/categories';
 import i18n from '../../i18n';
 import { GuildIcon } from '../GuildIcon';
 import { useTheme } from '../../hooks/theme';
@@ -37,6 +37,7 @@ export const Appointment = ({
   handleEdit,
   ...otherProps
 }: AppointmentProps) => {
+  const categories = useMemo(() => getCategories(), [i18n.locale]);
   const category = categories.find(({ id }) => id === data.category);
   const { owner, name, id, icon } = data?.guild;
   const editedDate = `${data.date.split(' ')[0]} ${i18n.t(
