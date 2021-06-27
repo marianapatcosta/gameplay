@@ -29,6 +29,7 @@ type ColorsTheme = {
   heading: string;
   line: string;
   on: string;
+  imageBg: string;
   discord: string;
 };
 

@@ -20,12 +20,12 @@ export const createStyles = (theme: ThemeSetting) => {
     title: {
       fontSize: 28,
       fontFamily: theme.fonts.title700,
-      color: theme.colors.heading,
+      color: theme.colors.imageBg,
     },
     subtitle: {
       fontSize: 13,
       fontFamily: theme.fonts.text400,
-      color: theme.colors.heading,
+      color: theme.colors.imageBg,
       lineHeight: 21,
     },
     members: {
