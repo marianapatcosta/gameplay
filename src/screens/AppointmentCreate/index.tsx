@@ -146,7 +146,7 @@ export const AppointmentCreate = () => {
       if (editMode) {
         const updatedItems = appointments.map(appointment =>
           appointment.id === appointmentToEdit.id
-            ? { newAppointment, id: appointment.id }
+            ? { ...newAppointment, id: appointment.id }
             : appointment
         );
         await saveItemInStorage(COLLECTION_APPOINTMENTS, updatedItems);
