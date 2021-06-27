@@ -55,7 +55,13 @@ export const AppointmentCreate = () => {
   const styles = createStyles(theme);
 
   const isFormFullfilled = useMemo(
-    () => !!category && !!guild && !!day && !!month && !!hour && !!minute,
+    () =>
+      !!category &&
+      !!Object.keys(guild).length &&
+      !!day &&
+      !!month &&
+      !!hour &&
+      !!minute,
     [category, guild, day, month, hour, minute]
   );
 
