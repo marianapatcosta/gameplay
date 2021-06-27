@@ -66,8 +66,17 @@ export const createStyles = (theme: ThemeSetting) => {
       paddingVertical: 10,
       opacity: 0.8,
     },
+    button: {
+      height: 35,
+      width: 55,
+      backgroundColor: theme.colors.secondary50,
+      borderWidth: 1,
+      borderRadius: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     editButton: {
-      marginRight: 15,
+      marginRight: 10,
     },
   });
 

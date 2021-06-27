@@ -1,10 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
-import {
-  BorderlessButton,
-  RectButton,
-  RectButtonProps,
-} from 'react-native-gesture-handler';
+import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
@@ -77,16 +73,20 @@ export const Appointment = ({
             </View>
           </View>
           <View style={styles.footer}>
-            <BorderlessButton style={styles.editButton} onPress={handleEdit}>
+            <RectButton
+              style={[styles.button, styles.editButton]}
+              onPress={handleEdit}
+            >
               <Entypo name='edit' size={20} color={theme.colors.heading} />
-            </BorderlessButton>
-            <BorderlessButton onPress={handleDelete}>
+            </RectButton>
+
+            <RectButton style={styles.button} onPress={handleDelete}>
               <MaterialIcons
                 name='delete'
                 size={20}
                 color={theme.colors.heading}
               />
-            </BorderlessButton>
+            </RectButton>
           </View>
         </View>
       </View>
