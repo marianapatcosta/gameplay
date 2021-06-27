@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { GuildDataProps } from '../../components/Guild';
 import { Guild, ListDivider, Loading, NoData } from '../../components';
-
+import { useTheme } from '../../hooks/theme';
 import { api } from '../../services/api';
 import i18n from '../../i18n';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type GuildsProps = {
   handleGuildSelect: (guild: GuildDataProps) => void;
@@ -16,6 +16,9 @@ export const Guilds = ({ handleGuildSelect }: GuildsProps) => {
   const [guilds, setGuilds] = useState<GuildDataProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const fetchGuilds = useCallback(async () => {
     try {

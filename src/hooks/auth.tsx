@@ -27,7 +27,7 @@ type User = {
   token: string;
 };
 
-type AuthContexData = {
+type AuthContextData = {
   user: User;
   isLoading: boolean;
   signIn: () => Promise<void>;
@@ -45,19 +45,9 @@ type AuthorizationResponse = AuthSession.AuthSessionResult & {
   };
 };
 
-console.log(
-  7777,
-  process.env,
-  CDN_IMAGE,
-  CLIENT_ID,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE
-);
+const AuthContext = createContext({} as AuthContextData);
 
-const AuthContext = createContext({} as AuthContexData);
-
-const AuthProvider = ({ children }: AuthProviderProps) => {
+const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -139,4 +129,4 @@ const useAuth = () => {
   return authContext;
 };
 
-export { AuthProvider, useAuth };
+export { AuthContextProvider, useAuth };

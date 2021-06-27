@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/auth';
-
+import { useTheme } from '../../hooks/theme';
 import i18n from '../../i18n';
 import { getRandomSentence } from '../../utils/random-greeting';
 import { Avatar } from '../Avatar';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type ProfileProps = {
   handleAvatarPress: () => void;
@@ -19,6 +19,9 @@ export const Profile = ({ handleAvatarPress }: ProfileProps) => {
     () => getRandomSentence(i18n.t('profile.greetingSentences')),
     [i18n.locale]
   );
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   return (
     <View style={styles.container}>

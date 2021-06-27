@@ -19,11 +19,11 @@ export const LOCALES: DROPDOWN_OPTION[] = [
 export const THEMES: DROPDOWN_OPTION[] = [
   {
     label: i18n.t('userProfile.dark'),
-    value: i18n.t('userProfile.dark'),
+    value: 'dark',
   },
   {
     label: i18n.t('userProfile.light'),
-    value: i18n.t('userProfile.light'),
+    value: 'light',
   },
 ];
 

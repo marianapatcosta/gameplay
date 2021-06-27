@@ -4,13 +4,16 @@ import { Text, View, Image, Alert, ActivityIndicator } from 'react-native';
 import { IllustrationImg } from '../../assets';
 import { Background, ButtonIcon } from '../../components';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 import i18n from '../../i18n';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 export const SignIn = () => {
   const { isLoading, signIn } = useAuth();
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const handleSignIn = async () => {
     try {

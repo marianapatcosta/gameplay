@@ -23,10 +23,11 @@ import {
   Profile,
 } from '../../components';
 import { ConfirmModal } from '../../modal-views';
+import { useTheme } from '../../hooks/theme';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import { COLLECTION_APPOINTMENTS } from '../../configs/database';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 export const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -39,6 +40,9 @@ export const Home = () => {
   );
   const navigation = useNavigation();
   const { getStoredItem, saveItemInStorage } = useAsyncStorage();
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const handleAppointmentDetails = (
     selectedAppointment: AppointmentDataProps
@@ -80,7 +84,7 @@ export const Home = () => {
       await saveItemInStorage(COLLECTION_APPOINTMENTS, updatedAppointments);
       await loadAppointments();
     } catch (error) {
-      Alert.alert(i18n.t('global.anErrorOccurred'));
+      Alert.alert(i18n.t('global.anErrorOccurred'), i18n.t('home.deleteError'));
     } finally {
       setItemToDelete({} as AppointmentDataProps);
       setOpenDeleteModal(false);
@@ -105,10 +109,7 @@ export const Home = () => {
       }
       setAppointments(storedAppointments);
     } catch (error) {
-      Alert.alert(
-        i18n.t('global.anErrorOccurred'),
-        i18n.t('appointmentCreate.error')
-      );
+      Alert.alert(i18n.t('global.anErrorOccurred'), i18n.t('home.error'));
     } finally {
       setIsLoading(false);
     }

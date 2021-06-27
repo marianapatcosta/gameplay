@@ -42,6 +42,7 @@
   },
   "home": {
     "deleteAppointment": "Do you want to delete the appointment?",
+    "deleteError": "It was not possible to delete the appointment.",
     "error": "It was not possible to load the scheduled games.",
     "listTitle": "Scheduled games",
     "listSubtitle": "Total {{nrOfGames}}",

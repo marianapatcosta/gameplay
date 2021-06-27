@@ -9,9 +9,9 @@ import { Feather } from '@expo/vector-icons';
 
 import i18n from '../../i18n';
 import { GuildIcon } from '../GuildIcon';
+import { useTheme } from '../../hooks/theme';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 export type GuildDataProps = {
   id: string;
@@ -25,6 +25,9 @@ type GuideProps = TouchableOpacityProps & {
 };
 
 export const Guild = ({ data, ...otherProps }: GuideProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
   return (
     <TouchableOpacity
       style={styles.container}

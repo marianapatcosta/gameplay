@@ -27,14 +27,14 @@ import {
 } from '../../components';
 import { Guilds } from '../../modal-views';
 import { GuildDataProps } from '../../components/Guild';
+import { useTheme } from '../../hooks/theme';
 import {
   MONTHS_WITH_THIRTY_DAYS,
   MONTH_WITH_LESS_THAN_THIRTY_DAYS,
 } from '../../utils/constants';
 import { AppointmentDataProps } from '../../components/Appointment';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type Params = {
   appointmentToEdit: AppointmentDataProps | undefined;
@@ -50,6 +50,9 @@ export const AppointmentCreate = () => {
   const [minute, setMinute] = useState<string>();
   const [description, setDescription] = useState<string>('');
   const [editMode, setEditMode] = useState<boolean>(false);
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const isFormFullfilled = useMemo(
     () => !!category && !!guild && !!day && !!month && !!hour && !!minute,

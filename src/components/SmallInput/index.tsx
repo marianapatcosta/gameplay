@@ -1,8 +1,14 @@
 import React from 'react';
 import { TextInput, TextInputProps } from 'react-native';
+import { useTheme } from '../../hooks/theme';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
-export const SmallInput = (props: TextInputProps) => (
-  <TextInput style={styles.container} {...props} keyboardType='numeric' />
-);
+export const SmallInput = (props: TextInputProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
+  return (
+    <TextInput style={styles.container} {...props} keyboardType='numeric' />
+  );
+};

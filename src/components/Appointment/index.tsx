@@ -11,11 +11,11 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 import { categories } from '../../utils/categories';
 import i18n from '../../i18n';
 import { GuildIcon } from '../GuildIcon';
+import { useTheme } from '../../hooks/theme';
 import { CalendarSvg, PlayerSvg } from '../../assets';
-
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
 import { GuildDataProps } from '../Guild';
+
+import { createStyles } from './styles';
 
 export type AppointmentDataProps = {
   id: string;
@@ -39,10 +39,13 @@ export const Appointment = ({
 }: AppointmentProps) => {
   const category = categories.find(({ id }) => id === data.category);
   const { owner, name, id, icon } = data?.guild;
-  const { primary, on, secondary50, secondary70 } = theme.colors;
   const editedDate = `${data.date.split(' ')[0]} ${i18n.t(
     'appointmentCreate.at'
   )} ${data.date.split(' ')[1]}`;
+
+  const { theme } = useTheme();
+  const { primary, on, secondary50, secondary70 } = theme.colors;
+  const styles = createStyles(theme);
 
   return (
     <RectButton {...otherProps}>

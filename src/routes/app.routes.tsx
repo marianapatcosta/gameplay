@@ -7,23 +7,26 @@ import {
   Home,
   UserProfile,
 } from '../screens';
-
-import { theme } from '../global/styles/theme';
+import { useTheme } from '../hooks/theme';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export const AppRoutes = () => (
-  <Navigator
-    headerMode='none'
-    screenOptions={{
-      cardStyle: {
-        backgroundColor: theme.colors.secondary100,
-      },
-    }}
-  >
-    <Screen name='Home' component={Home} />
-    <Screen name='AppointmentDetails' component={AppointmentDetails} />
-    <Screen name='AppointmentCreate' component={AppointmentCreate} />
-    <Screen name='UserProfile' component={UserProfile} />
-  </Navigator>
-);
+export const AppRoutes = () => {
+  const { theme } = useTheme();
+
+  return (
+    <Navigator
+      headerMode='none'
+      screenOptions={{
+        cardStyle: {
+          backgroundColor: theme.colors.secondary100,
+        },
+      }}
+    >
+      <Screen name='Home' component={Home} />
+      <Screen name='AppointmentDetails' component={AppointmentDetails} />
+      <Screen name='AppointmentCreate' component={AppointmentCreate} />
+      <Screen name='UserProfile' component={UserProfile} />
+    </Navigator>
+  );
+};

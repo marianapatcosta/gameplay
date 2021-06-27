@@ -1,9 +1,11 @@
 import React from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { useTheme } from '../../hooks/theme';
 import { Category } from '../Category';
 import { categories } from '../../utils/categories';
-import { styles } from './styles';
+
+import { createStyles } from './styles';
 
 type CategorySelectProps = {
   categorySelected: string;
@@ -16,25 +18,30 @@ export const CategorySelect = ({
   handleCategorySelect,
   hasCheckbox = false,
   ...otherProps
-}: CategorySelectProps) => (
-  <ScrollView
-    style={styles.container}
-    horizontal
-    showsHorizontalScrollIndicator={false}
-    contentContainerStyle={{
-      paddingRight: 40,
-    }}
-    {...otherProps}
-  >
-    {categories.map(({ id, title, icon }) => (
-      <Category
-        key={id}
-        title={title}
-        icon={icon}
-        hasCheckbox={hasCheckbox}
-        checked={id === categorySelected}
-        onPress={() => handleCategorySelect(id)}
-      />
-    ))}
-  </ScrollView>
-);
+}: CategorySelectProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
+  return (
+    <ScrollView
+      style={styles.container}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        paddingRight: 40,
+      }}
+      {...otherProps}
+    >
+      {categories.map(({ id, title, icon }) => (
+        <Category
+          key={id}
+          title={title}
+          icon={icon}
+          hasCheckbox={hasCheckbox}
+          checked={id === categorySelected}
+          onPress={() => handleCategorySelect(id)}
+        />
+      ))}
+    </ScrollView>
+  );
+};
