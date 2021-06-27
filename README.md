@@ -18,7 +18,7 @@ As extra-features to the app teached in the video lessons, this project implemen
 - Add RefreshControl component and the required logic to refresh the content of all the FlatLists implemented in the app.
 - Validate Appointment creation form for empty values and invalid date; disable button when form is not completely fullfilled.
 
-![gameplay-overview](https://user-images.githubusercontent.com/43031902/123541367-12e5ed00-d73c-11eb-9728-5ab5e274fa38.png)
+![gameplay-overview](https://user-images.githubusercontent.com/43031902/123546431-619f8100-d754-11eb-9dfd-db38dd875476.png)
 
 ## Project setup
 
@@ -26,7 +26,7 @@ As extra-features to the app teached in the video lessons, this project implemen
 yarn install
 ```
 
-Be sure that the _.env.example_ file is renamed to _.env_ and all the values for the variables declared in this file are properly fullfilled with data of your own.
+Be sure that the _.env.example_ file is renamed to _.env_ and all the values for the variables declared in this file are properly fullfilled with your data.
 
 ### Compiles and hot-reloads for development using Expo Go
 
