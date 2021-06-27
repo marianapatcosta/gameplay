@@ -18,7 +18,7 @@ As extra-features to the app teached in the video lessons, this project implemen
 - Add RefreshControl component and the required logic to refresh the content of all the FlatLists implemented in the app.
 - Validate Appointment creation form for empty values and invalid date; disable button when form is not completely fullfilled.
 
-![game-playoverview](https://user-images.githubusercontent.com/43031902/123529413-d4264780-d6e7-11eb-91fb-c96c54bb913a.png)
+![gameplay-overwiew](https://user-images.githubusercontent.com/43031902/123540857-fdbb8f00-d738-11eb-9ae0-979249ea3e37.png)
 
 ## Project setup
 
