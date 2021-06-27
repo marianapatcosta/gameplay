@@ -1,17 +1,18 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
-// import { ThemeContext } from '../../contexts/ThemeContext'
+import { useTheme } from '../../hooks/theme';
+
+import { createStyles } from './styles';
 
 type BackgroundProps = {
   children: ReactNode;
 };
 
 export const Background = ({ children }: BackgroundProps) => {
-  // const theme = useContext(ThemeContext)
+  const { theme } = useTheme();
   const { secondary80, secondary100 } = theme.colors;
+  const styles = createStyles(theme);
 
   return (
     <LinearGradient

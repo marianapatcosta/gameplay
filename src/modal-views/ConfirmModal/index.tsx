@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-
+import { useTheme } from '../../hooks/theme';
 import i18n from '../../i18n';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type ConfirmModalProps = {
   title: string | ReactNode;
@@ -16,6 +16,9 @@ export const ConfirmModal = ({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
   return (
     <View style={styles.container} accessible={true}>
       <View style={styles.titleContainer}>

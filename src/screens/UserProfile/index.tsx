@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Alert, Text, Dimensions } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
@@ -11,10 +11,10 @@ import { useAuth } from '../../hooks/auth';
 import i18n from '../../i18n';
 import { LOCALES, THEMES } from '../../utils/constants';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
-import { COLLECTION_LOCALE, COLLECTION_THEME } from '../../configs/database';
+import { useTheme, Theme } from '../../hooks/theme';
+import { COLLECTION_LOCALE } from '../../configs/database';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 enum DROPDOWN_TYPES {
   LOCALES = 'locales',
@@ -23,34 +23,31 @@ enum DROPDOWN_TYPES {
 
 export const UserProfile = () => {
   const { user, signOut } = useAuth();
+  const { currentTheme, theme, defineTheme } = useTheme();
   const [selectedLocale, setSelectedLocale] = useState<string>(i18n.locale);
-  const [selectedTheme, setSelectedTheme] = useState<string>(
-    i18n.t('userProfile.dark')
-  );
+  const [selectedTheme, setSelectedTheme] = useState<string>(currentTheme);
   const [openedDropDown, setOpenedDropdown] = useState<string>('');
   const [openLogoutModal, setOpenLogoutModal] = useState<boolean>(false);
+  const locales = useMemo(() => LOCALES, [i18n.locale]);
+
+  const styles = createStyles(theme);
 
   const { saveItemInStorage } = useAsyncStorage();
 
-  const handleLocaleSelection = async (localeValue: string) => {
-    i18n.locale = localeValue;
+  const handleLocaleSelection = async (locale: string) => {
+    i18n.locale = locale;
     setOpenedDropdown('');
 
     try {
-      await saveItemInStorage(COLLECTION_LOCALE, localeValue);
+      await saveItemInStorage(COLLECTION_LOCALE, locale);
     } catch (error) {
       Alert.alert(i18n('global.anErrorOccurred'));
     }
   };
 
-  const handleThemeSelection = async (themeValue: string) => {
+  const handleThemeSelection = async (theme: Theme) => {
     setOpenedDropdown('');
-
-    /*    try {
-      await saveItemInStorage(COLLECTION_THEME, themeValue);
-    } catch (error) {
-      Alert.alert(i18n('global.anErrorOccurred'));
-    } */
+    defineTheme(theme);
   };
 
   const handleOpenLogoutModal = () => {
@@ -92,6 +89,7 @@ export const UserProfile = () => {
       color: theme.colors.heading,
     },
   };
+  //console.log(77, locales, i18n.t('userProfile.portuguese'));
 
   return (
     <Background>
@@ -111,7 +109,7 @@ export const UserProfile = () => {
           <DropDownPicker
             open={openedDropDown === DROPDOWN_TYPES.LOCALES}
             value={selectedLocale}
-            items={LOCALES}
+            items={locales}
             setOpen={() => setOpenedDropdown(DROPDOWN_TYPES.LOCALES)}
             setValue={setSelectedLocale}
             onChangeValue={item => handleLocaleSelection(item as string)}
@@ -128,13 +126,12 @@ export const UserProfile = () => {
             items={THEMES}
             setOpen={() => setOpenedDropdown(DROPDOWN_TYPES.THEMES)}
             setValue={setSelectedTheme}
-            onChangeValue={item => handleThemeSelection(item as string)}
+            onChangeValue={item => handleThemeSelection(item as Theme)}
             zIndex={2000}
             zIndexInverse={2000}
             {...commonDropdowmProps}
           />
         </View>
-
         <RectButton onPress={handleOpenLogoutModal}>
           <View style={styles.logoutButton}>
             <Text style={styles.logout}>{i18n.t('userProfile.logout')}</Text>

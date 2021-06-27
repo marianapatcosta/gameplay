@@ -27,11 +27,12 @@ import {
   Member,
   NoData,
 } from '../../components';
+import { useTheme } from '../../hooks/theme';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
 import { useRoute } from '@react-navigation/native';
 import { api } from '../../services/api';
+
+import { createStyles } from './styles';
 
 type GuildWidget = {
   id: string;
@@ -52,6 +53,9 @@ export const AppointmentDetails = () => {
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const fetchGuildsWidget = useCallback(async () => {
     try {

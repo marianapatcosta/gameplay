@@ -1,11 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../global/styles/theme';
+import { ThemeSetting } from '../../hooks/theme';
 
-export const styles = StyleSheet.create({
-  container: {
-    width: '78%',
-    height: 1,
-    backgroundColor: theme.colors.secondary40,
-    alignSelf: 'flex-end',
-  },
-});
+export const createStyles = (theme: ThemeSetting) => {
+  const styles = StyleSheet.create({
+    container: {
+      width: '78%',
+      height: 1,
+      backgroundColor: theme.colors.secondary40,
+      alignSelf: 'flex-end',
+    },
+  });
+  return styles;
+};

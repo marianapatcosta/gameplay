@@ -42,6 +42,7 @@
   },
   "home": {
     "deleteAppointment": "Pretende eliminar o agendamento?",
+    "deleteError": "Não foi possível eliminar o agendamento.",
     "error": "Não foi possível mostrar os jogos agendados.",
     "listTitle": "Jogos agendados",
     "listSubtitle": "Total {{nrOfGames}}",

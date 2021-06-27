@@ -6,8 +6,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Background } from '../Background';
+import { useTheme } from '../../hooks/theme';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type ModalViewProps = ModalProps & {
   children: ReactNode;
@@ -20,19 +21,29 @@ export const ModalView = ({
   children,
   closeModal,
   hasTopBar = false,
-  marginTop,
+  marginTop = 100,
   ...otherProps
-}: ModalViewProps) => (
-  <Modal transparent animationType='slide' statusBarTranslucent {...otherProps}>
-    <TouchableWithoutFeedback onPress={closeModal}>
-      <View style={styles.overlay}>
-        <View style={[styles.container, { marginTop }]}>
-          <Background>
-            {hasTopBar && <View style={styles.bar} />}
-            {children}
-          </Background>
+}: ModalViewProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
+  return (
+    <Modal
+      transparent
+      animationType='slide'
+      statusBarTranslucent
+      {...otherProps}
+    >
+      <TouchableWithoutFeedback onPress={closeModal}>
+        <View style={styles.overlay}>
+          <View style={[styles.container, { marginTop }]}>
+            <Background>
+              {hasTopBar && <View style={styles.bar} />}
+              {children}
+            </Background>
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
-  </Modal>
-);
+      </TouchableWithoutFeedback>
+    </Modal>
+  );
+};

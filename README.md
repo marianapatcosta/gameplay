@@ -10,11 +10,12 @@ As extra-features to the app teached in the video lessons, this project implemen
 - Development UserProfile screen, to handle the logout and language settings.
 - Development of Logout modal to signout.
 - Implement Edit and Delete appointment functionalities.
+- Development of useTheme hook to implement dark and light themes.
 - Implementation of useAsyncStorage hook to abstrat the storage management logic.
 - Implementation of a function to generate a random greeting sentence in the Home screen, when the user access the app, among some pre-defined sentences.
 - Implementation of Alert component with customized error messages when fetch data from api or async storage fails
 - Creation of _NoData_ component to display a message when there are no appointments, no members and no grids to display, in Home screen, Appointment Screen and Guilds modal, respectively.
-- Add RefreshContorl component and the required logic to refresh the content of all the FlatLists implemented in the app.
+- Add RefreshControl component and the required logic to refresh the content of all the FlatLists implemented in the app.
 - Validate Appointment creation form for empty values and invalid date; disable button when form is not completely fullfilled.
 
 ## Project setup

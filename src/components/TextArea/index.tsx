@@ -1,8 +1,12 @@
 import React from 'react';
 import { TextInput, TextInputProps } from 'react-native';
+import { useTheme } from '../../hooks/theme';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
-export const TextArea = (props: TextInputProps) => (
-  <TextInput style={styles.container} {...props} />
-);
+export const TextArea = (props: TextInputProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
+  return <TextInput style={styles.container} {...props} />;
+};

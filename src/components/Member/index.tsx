@@ -3,9 +3,9 @@ import { Text, View } from 'react-native';
 
 import i18n from '../../i18n';
 import { Avatar } from '../Avatar';
+import { useTheme } from '../../hooks/theme';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 export type MemberDataProps = {
   id: string;
@@ -19,9 +19,12 @@ type MemberProps = {
 };
 
 export const Member = ({ data }: MemberProps) => {
-  const { on, primary } = theme.colors;
   const { avatar_url, username, status } = data;
   const isOnline = status === 'online';
+
+  const { theme } = useTheme();
+  const { on, primary } = theme.colors;
+  const styles = createStyles(theme);
 
   return (
     <View style={styles.container}>

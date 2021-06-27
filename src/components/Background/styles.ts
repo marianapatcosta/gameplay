@@ -1,7 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+import { ThemeSetting } from '../../hooks/theme';
+
+export const createStyles = (theme: ThemeSetting) => {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
+
+  return styles;
+};

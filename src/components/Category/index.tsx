@@ -3,9 +3,9 @@ import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SvgProps } from 'react-native-svg';
 import { View, Text } from 'react-native';
+import { useTheme } from '../../hooks/theme';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type CategoryProps = RectButtonProps & {
   title: string;
@@ -21,7 +21,9 @@ export const Category = ({
   hasCheckbox = false,
   ...otherProps
 }: CategoryProps) => {
+  const { theme } = useTheme();
   const { secondary40, secondary50, secondary70, secondary85 } = theme.colors;
+  const styles = createStyles(theme);
 
   return (
     <RectButton {...otherProps}>

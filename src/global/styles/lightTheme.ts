@@ -1,19 +1,20 @@
 export const lightTheme = {
   colors: {
-    primary: 'green',
+    primary: '#E51C44',
 
-    secondary100: '#0A1033',
-    secondary90: '#0D133D',
-    secondary80: '#0E1647',
-    secondary70: '#1B2565',
-    secondary60: '#1B2565',
-    secondary50: '#243189',
-    secondary40: '#1D2766',
-    secondary30: '#495BCC',
+    secondary100: '#fbfeff',
+    secondary90: '#f8fdfe',
+    secondary85: '#f4fcfe',
+    secondary80: '#f1fafd',
+    secondary70: '#edf9fd',
+    secondary60: '#e9f8fc',
+    secondary50: '#def5fb',
+    secondary40: '#daf3fb',
+    secondary30: '#d6f2fa',
 
     overlay: 'rgba(0,0,0,0.7)',
-    highlight: '#ABB1CC',
-    heading: '#DDE3F0',
+    highlight: '#212529',
+    heading: '#00070d',
     line: '#991F36',
     on: '#32BD50',
 

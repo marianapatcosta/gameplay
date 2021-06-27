@@ -4,9 +4,9 @@ import { Text, View } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import { useTheme } from '../../hooks/theme';
 
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type HeaderProps = {
   title: string;
@@ -14,8 +14,11 @@ type HeaderProps = {
 };
 
 export const Header = ({ title, action }: HeaderProps) => {
-  const { secondary100, secondary40, heading } = theme.colors;
   const navigation = useNavigation();
+
+  const { theme } = useTheme();
+  const { secondary100, secondary40, heading } = theme.colors;
+  const styles = createStyles(theme);
 
   const handleGoBack = () => navigation.goBack();
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from '../../hooks/theme';
 
-import { styles } from './styles';
+import { createStyles } from './styles';
 
 type ListHeaderProps = {
   title: string;
@@ -9,6 +10,9 @@ type ListHeaderProps = {
 };
 
 export const ListHeader = ({ title, subtitle }: ListHeaderProps) => {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
