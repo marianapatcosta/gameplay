@@ -33,7 +33,11 @@ export const ConfirmModal = ({
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.confirmButton} onPress={onConfirm}>
-            <Text style={styles.buttonLabel}>{i18n.t('global.yes')}</Text>
+            <Text
+              style={[styles.buttonLabel, { color: theme.colors.contrast }]}
+            >
+              {i18n.t('global.yes')}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
