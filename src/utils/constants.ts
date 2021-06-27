@@ -5,7 +5,7 @@ export type DROPDOWN_OPTION = {
   value: string;
 };
 
-export const LOCALES: DROPDOWN_OPTION[] = [
+export const getLocales = (): DROPDOWN_OPTION[] => [
   {
     label: i18n.t('userProfile.portuguese'),
     value: 'pt-PT',
@@ -16,7 +16,7 @@ export const LOCALES: DROPDOWN_OPTION[] = [
   },
 ];
 
-export const THEMES: DROPDOWN_OPTION[] = [
+export const getThemes = (): DROPDOWN_OPTION[] => [
   {
     label: i18n.t('userProfile.dark'),
     value: 'dark',

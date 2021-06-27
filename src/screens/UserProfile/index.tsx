@@ -9,7 +9,7 @@ import { Avatar, Background, Header, ModalView } from '../../components';
 import { ConfirmModal } from '../../modal-views';
 import { useAuth } from '../../hooks/auth';
 import i18n from '../../i18n';
-import { LOCALES, THEMES } from '../../utils/constants';
+import { getLocales, getThemes } from '../../utils/constants';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
 import { useTheme, Theme } from '../../hooks/theme';
 import { COLLECTION_LOCALE } from '../../configs/database';
@@ -28,17 +28,21 @@ export const UserProfile = () => {
   const [selectedTheme, setSelectedTheme] = useState<string>(currentTheme);
   const [openedDropDown, setOpenedDropdown] = useState<string>('');
   const [openLogoutModal, setOpenLogoutModal] = useState<boolean>(false);
-  const locales = useMemo(() => LOCALES, [i18n.locale]);
+
+  const locales = useMemo(() => getLocales(), [i18n.locale]);
+  const themes = useMemo(() => getThemes(), [i18n.locale]);
+
+  const forceUpdate: () => void = useState()[1].bind(null, {} as any);
 
   const styles = createStyles(theme);
 
   const { saveItemInStorage } = useAsyncStorage();
 
   const handleLocaleSelection = async (locale: string) => {
-    i18n.locale = locale;
-    setOpenedDropdown('');
-
     try {
+      i18n.locale = locale;
+      setOpenedDropdown('');
+      forceUpdate();
       await saveItemInStorage(COLLECTION_LOCALE, locale);
     } catch (error) {
       Alert.alert(i18n('global.anErrorOccurred'));
@@ -46,8 +50,8 @@ export const UserProfile = () => {
   };
 
   const handleThemeSelection = async (theme: Theme) => {
-    setOpenedDropdown('');
     defineTheme(theme);
+    setOpenedDropdown('');
   };
 
   const handleOpenLogoutModal = () => {
@@ -89,7 +93,6 @@ export const UserProfile = () => {
       color: theme.colors.heading,
     },
   };
-  //console.log(77, locales, i18n.t('userProfile.portuguese'));
 
   return (
     <Background>
@@ -123,7 +126,7 @@ export const UserProfile = () => {
           <DropDownPicker
             open={openedDropDown === DROPDOWN_TYPES.THEMES}
             value={selectedTheme}
-            items={THEMES}
+            items={themes}
             setOpen={() => setOpenedDropdown(DROPDOWN_TYPES.THEMES)}
             setValue={setSelectedTheme}
             onChangeValue={item => handleThemeSelection(item as Theme)}

@@ -13,7 +13,7 @@ export const ButtonAdd = (props: RectButtonProps) => {
     <RectButton style={styles.container} {...props}>
       <MaterialCommunityIcons
         name='plus'
-        color={theme.colors.heading}
+        color={theme.colors.contrast}
         size={24}
       />
     </RectButton>

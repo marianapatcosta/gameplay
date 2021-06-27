@@ -7,9 +7,9 @@ This app implements authentication using OAuth2 protocol with a Discord account 
 As extra-features to the app teached in the video lessons, this project implemented:
 
 - Implementation of multilanguage with i18n-js and expo-localization; the app can be visualized either in english or in portuguese, with the flexibility to add more languages.
-- Development UserProfile screen, to handle the logout and language settings.
-- Development of Logout modal to signout.
 - Implement Edit and Delete appointment functionalities.
+- Development UserProfile screen, to handle the logout, language ant theme settings and a link to user's profile in Discord.
+- Development of Logout modal to signout.
 - Development of useTheme hook to implement dark and light themes.
 - Implementation of useAsyncStorage hook to abstrat the storage management logic.
 - Implementation of a function to generate a random greeting sentence in the Home screen, when the user access the app, among some pre-defined sentences.

@@ -17,7 +17,7 @@ export const lightTheme = {
     heading: '#00070d',
     line: '#991F36',
     on: '#32BD50',
-    imageBg: '#DDE3F0',
+    contrast: '#DDE3F0',
 
     discord: '#7289da',
   },

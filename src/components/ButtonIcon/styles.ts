@@ -22,7 +22,7 @@ export const createStyles = (theme: ThemeSetting) => {
     icon: {},
     title: {
       flex: 1,
-      color: theme.colors.heading,
+      color: theme.colors.contrast,
       fontSize: 15,
       fontFamily: theme.fonts.text500,
       textAlign: 'center',
