@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.marianacosta.gameplay",
@@ -26,11 +24,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF",
-        "package": "com.marianacosta.gameplay",
-        "versionCode": 1
+        "backgroundColor": "#FFFFFF"
       },
-      "package": "com.marianacosta.gameplay"
+      "package": "com.marianacosta.gameplay",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
