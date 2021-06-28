@@ -14,7 +14,8 @@
     "selectServer": "Selecione um servidor",
     "max": "Máx 100 caracteres",
     "schedule": "Agendar",
-    "title": "Agendar jogo"
+    "title": "Agendar jogo",
+    "titleEdit": "Editar jogo"
   },
   "appointmentDetails": {
     "error": "Verifique as configurações do servidor. O widget do servidor está activado?",

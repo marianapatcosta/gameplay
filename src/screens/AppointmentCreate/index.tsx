@@ -190,7 +190,13 @@ export const AppointmentCreate = () => {
     >
       <Background>
         <ScrollView>
-          <Header title={i18n.t('appointmentCreate.title')} />
+          <Header
+            title={
+              editMode
+                ? i18n.t('appointmentCreate.titleEdit')
+                : i18n.t('appointmentCreate.title')
+            }
+          />
           <Text
             style={[
               styles.label,
