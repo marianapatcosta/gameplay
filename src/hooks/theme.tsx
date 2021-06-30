@@ -45,6 +45,9 @@ type ThemeSetting = {
   fonts: FontTheme;
 };
 
+// all the ThemeSetting type could be generated as below, using a theme structure as model
+// type ThemeSetting = typeof themes.dark;
+
 type ThemeContextData = {
   currentTheme: Theme;
   theme: ThemeSetting;
