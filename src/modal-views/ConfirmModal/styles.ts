@@ -18,11 +18,6 @@ export const createStyles = (theme: ThemeSetting) => {
       color: theme.colors.heading,
       textAlign: 'center',
     },
-    titleRed: {
-      fontSize: 20,
-      fontFamily: theme.fonts.title700,
-      color: theme.colors.primary,
-    },
     buttons: {
       marginBottom: 40,
       marginTop: 24,

@@ -7,7 +7,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-
 import { AppointmentDataProps } from '../../components/Appointment';
 import i18n from '../../i18n';
 import {
@@ -51,7 +50,7 @@ export const Home = () => {
   const handleAppointmentCreate = () =>
     navigation.navigate('AppointmentCreate');
 
-  const handleAUserProfile = () => navigation.navigate('UserProfile');
+  const handleGoToUserProfile = () => navigation.navigate('UserProfile');
 
   const handleCategorySelect = (categoryId: string) =>
     categoryId === selectedCategory
@@ -173,7 +172,7 @@ export const Home = () => {
       <Background>
         <View style={styles.container} accessible={true}>
           <View style={styles.header}>
-            <Profile handleAvatarPress={handleAUserProfile} />
+            <Profile handleAvatarPress={handleGoToUserProfile} />
             <ButtonAdd onPress={handleAppointmentCreate} />
           </View>
           <View>

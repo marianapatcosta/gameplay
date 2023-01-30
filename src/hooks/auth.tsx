@@ -61,14 +61,12 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
     try {
       setIsLoading(true);
       const authUrl = `${api.defaults.baseURL}oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
-
       const {
         type,
         params: { access_token, error },
       } = (await AuthSession.startAsync({
         authUrl,
       })) as AuthorizationResponse;
-
       if (type === ResponseTypes.SUCCESS && !error) {
         api.defaults.headers.authorization = `Bearer ${access_token}`;
 

@@ -73,7 +73,7 @@ export const UserProfile = () => {
   const handleGoToDiscord = () =>
     Linking.openURL(`https://discordapp.com/users/${user.id}`);
 
-  const commonDropdowmProps = {
+  const commonDropdownProps = {
     onClose: () => setOpenedDropdown(''),
     textStyle: styles.dropdownText,
     ArrowDownIconComponent: () => (
@@ -118,7 +118,7 @@ export const UserProfile = () => {
             onChangeValue={item => handleLocaleSelection(item as string)}
             zIndex={3000}
             zIndexInverse={1000}
-            {...commonDropdowmProps}
+            {...commonDropdownProps}
           />
         </View>
         <View>
@@ -132,7 +132,7 @@ export const UserProfile = () => {
             onChangeValue={item => handleThemeSelection(item as Theme)}
             zIndex={2000}
             zIndexInverse={2000}
-            {...commonDropdowmProps}
+            {...commonDropdownProps}
           />
         </View>
         <RectButton onPress={handleOpenLogoutModal}>
